@@ -3,11 +3,11 @@
 
 ?>
 <?php
-	$class = new admincLogin();
+	$class = new adminLogin();
 	if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		$adminUser = $_POST['adminUser'];
 
-		$adminPass = $_POST['adminPass'];
+		$adminPass = md5($_POST['adminPass']);
 
 		$login_check =  $class->login_admin($adminUser,$adminPass);
  	}	
@@ -25,11 +25,16 @@
 	<section id="content">
 		<form action="login.php" method="post">
 			<h1>Admin Login</h1>
-			<div>
-				<input type="text" placeholder="Username" required="" name="adminUser"/>
+			<span><?php
+				if(isset($login_check)){
+					echo $login_check;
+				}
+			?></span>
+			<div>	
+				<input type="text" placeholder="Username"  name="adminUser"/>
 			</div>
 			<div>
-				<input type="password" placeholder="Password" required="" name="adminPass"/>
+				<input type="password" placeholder="Password" name="adminPass"/>
 			</div>
 			<div>
 				<input type="submit" value="Log in" />

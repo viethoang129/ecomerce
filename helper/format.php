@@ -30,4 +30,4 @@ $title = 'contact';
 }
 return $title = ucfirst($title);
 
-?>
+}}
